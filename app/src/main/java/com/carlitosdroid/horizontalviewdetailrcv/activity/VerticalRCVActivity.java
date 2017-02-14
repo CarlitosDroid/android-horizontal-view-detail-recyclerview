@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class VerticalRCVActivity extends AppCompatActivity implements View.OnClickListener {
+public class VerticalRCVActivity extends AppCompatActivity{
 
     RecyclerView rcvAnimals;
     private VerticalAdapter verticalAdapter;
@@ -57,7 +56,6 @@ public class VerticalRCVActivity extends AppCompatActivity implements View.OnCli
         rcvAnimals.setLayoutManager(layoutManager);
         rcvAnimals.setAdapter(verticalAdapter);
 
-
         rcvAnimals.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -76,17 +74,6 @@ public class VerticalRCVActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    private void addLoadingItem() {
-        objectList.add(new LoadingEntity("loading"));
-    }
-
-    private void shouldRemoveLoadingItem() {
-        if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
-            objectList.remove(objectList.size() - 1);
-            verticalAdapter.notifyItemRemoved(objectList.size());
-        }
-    }
-
     private class RequestMoreData extends AsyncTask<Void, Void, Void> {
 
         private RequestMoreData() {
@@ -100,7 +87,7 @@ public class VerticalRCVActivity extends AppCompatActivity implements View.OnCli
         @Override
         protected Void doInBackground(Void... voids) {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -122,22 +109,15 @@ public class VerticalRCVActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-
-        }
+    private void addLoadingItem() {
+        objectList.add(new LoadingEntity("loading"));
     }
 
-    public void goToDetail(int position) {
-        shouldRemoveLoadingItem();
-        checkRequestMoreData();
-
-        Intent intent = new Intent(this, HorizontalRCVActivity.class);
-        intent.putExtra("listObject", ((Serializable) objectList));
-        intent.putExtra("position", position);
-        startActivityForResult(intent, 123);
+    private void shouldRemoveLoadingItem() {
+        if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
+            objectList.remove(objectList.size() - 1);
+            verticalAdapter.notifyItemRemoved(objectList.size());
+        }
     }
 
     private void checkRequestMoreData(){
@@ -149,6 +129,15 @@ public class VerticalRCVActivity extends AppCompatActivity implements View.OnCli
     public void changeImageAndroid(int position, boolean isFavorited) {
         ((AnimalEntity) objectList.get(position)).setIsfavorite(isFavorited);
         verticalAdapter.notifyDataSetChanged();
+    }
+
+    public void goToDetail(int position) {
+        checkRequestMoreData();
+
+        Intent intent = new Intent(this, HorizontalRCVActivity.class);
+        intent.putExtra("listObject", ((Serializable) objectList));
+        intent.putExtra("position", position);
+        startActivityForResult(intent, 123);
     }
 
     @Override

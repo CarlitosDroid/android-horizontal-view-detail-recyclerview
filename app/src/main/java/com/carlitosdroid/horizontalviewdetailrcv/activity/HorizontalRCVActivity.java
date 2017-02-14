@@ -33,7 +33,6 @@ public class HorizontalRCVActivity extends AppCompatActivity {
     private final int visibleThreshold = 1;
 
     private boolean setLoading = false;
-
     private RequestMoreData requestMoreData;
 
 
@@ -61,7 +60,7 @@ public class HorizontalRCVActivity extends AppCompatActivity {
 
                 totalItemCount = layoutManager.getItemCount();
                 lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                if (totalItemCount <= (lastVisibleItem + visibleThreshold + 1)) {
+                if (totalItemCount <= (lastVisibleItem + visibleThreshold)) {
                     if (!setLoading) {
                         setLoading = true;
                         requestMoreData = new RequestMoreData();
@@ -80,7 +79,6 @@ public class HorizontalRCVActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             Toast.makeText(HorizontalRCVActivity.this, "Requesting...", Toast.LENGTH_SHORT).show();
-            addLoadingItem();
         }
 
         @Override
@@ -97,28 +95,31 @@ public class HorizontalRCVActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            removeLoadingItem();
+            shouldRemoveLoadingItem();
             setLoading = false;
-
             int tempSize = objectList.size();
             for (int i = tempSize ; i < (tempSize + 10); i++) {
                 objectList.add(new AnimalEntity(false, "item" + i));
             }
+            addLoadingItem();
             horizontalAdapter.notifyDataSetChanged();
         }
     }
 
     private void addLoadingItem() {
         objectList.add(new LoadingEntity("loading"));
-        horizontalAdapter.notifyItemInserted(objectList.size()-1);
     }
 
-    private void removeLoadingItem() {
-        if (!objectList.isEmpty()) {
-            if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
-                objectList.remove(objectList.size() - 1);
-                horizontalAdapter.notifyItemRemoved(objectList.size());
-            }
+    private void shouldRemoveLoadingItem() {
+        if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
+            objectList.remove(objectList.size() - 1);
+            horizontalAdapter.notifyItemRemoved(objectList.size());
+        }
+    }
+
+    private void checkRequestMoreData(){
+        if(requestMoreData != null){
+            requestMoreData.cancel(true);
         }
     }
 
@@ -129,10 +130,7 @@ public class HorizontalRCVActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
-            requestMoreData.cancel(true);
-            removeLoadingItem();
-        }
+        checkRequestMoreData();
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("newList", (Serializable) objectList);
