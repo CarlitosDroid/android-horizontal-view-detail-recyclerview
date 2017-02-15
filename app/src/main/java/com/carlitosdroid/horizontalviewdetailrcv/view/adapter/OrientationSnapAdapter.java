@@ -1,4 +1,4 @@
-package com.carlitosdroid.horizontalviewdetailrcv.model;
+package com.carlitosdroid.horizontalviewdetailrcv.view.adapter;
 
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
+import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
 
 import java.util.List;
 
@@ -16,11 +17,11 @@ import java.util.List;
  *
  */
 
-public class HorizontalSnapAdapter extends RecyclerView.Adapter<HorizontalSnapAdapter.HorizontalSnapViewHolder> {
+public class OrientationSnapAdapter extends RecyclerView.Adapter<OrientationSnapAdapter.HorizontalSnapViewHolder> {
 
     private List<AnimalEntity> animalEntities;
 
-    public HorizontalSnapAdapter(List<AnimalEntity> animalEntities) {
+    public OrientationSnapAdapter(List<AnimalEntity> animalEntities) {
         this.animalEntities = animalEntities;
     }
 

@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
-import com.carlitosdroid.horizontalviewdetailrcv.activity.LinearSnapHelperActivity;
-import com.carlitosdroid.horizontalviewdetailrcv.model.HorizontalSnapAdapter;
+import com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSnapHelperActivity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.JuryEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 
@@ -22,9 +21,9 @@ import java.util.List;
  *
  */
 
-public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MultipleOrientationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private LinearSnapHelperActivity linearSnapHelperActivity;
+    private MultipleOrientationSnapHelperActivity multipleOrientationSnapHelperActivity;
     private List<Object> objectList;
 
     private static final int TYPE_ITEM = 0;
@@ -33,10 +32,10 @@ public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private LinearLayoutManager linearLayoutManager;
 
-    public SnapAdapter(LinearSnapHelperActivity linearSnapHelperActivity, List<Object> objectList) {
-        this.linearSnapHelperActivity = linearSnapHelperActivity;
+    public MultipleOrientationAdapter(MultipleOrientationSnapHelperActivity multipleOrientationSnapHelperActivity, List<Object> objectList) {
+        this.multipleOrientationSnapHelperActivity = multipleOrientationSnapHelperActivity;
         this.objectList = objectList;
-        linearLayoutManager = new LinearLayoutManager(linearSnapHelperActivity, LinearLayoutManager.HORIZONTAL, false);
+        linearLayoutManager = new LinearLayoutManager(multipleOrientationSnapHelperActivity, LinearLayoutManager.HORIZONTAL, false);
     }
 
     @Override
@@ -75,12 +74,20 @@ public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 ((SnapViewHolder)holder).lblTitle.setText(juryEntity.getTitle());
                 ((SnapViewHolder)holder).rcvSnap.setLayoutManager(linearLayoutManager);
 
-                HorizontalSnapAdapter horizontalSnapAdapter = new HorizontalSnapAdapter(juryEntity.getAnimalEntities());
-                ((SnapViewHolder)holder).rcvSnap.setAdapter(horizontalSnapAdapter);
+                OrientationSnapAdapter orientationSnapAdapter = new OrientationSnapAdapter(juryEntity.getAnimalEntities());
+                ((SnapViewHolder)holder).rcvSnap.setAdapter(orientationSnapAdapter);
+
+//                ((SnapViewHolder)holder).rcvSnap.setOnFlingListener(new OnFlingListener() {
+//                    @Override
+//                    public boolean onFling(int velocityX, int velocityY) {
+//
+//                        Log.e("VEAMOS1 ","VEAMOS " +velocityX );
+//                        Log.e("VEAMOS2 ","VEAMOS "  +velocityY);
+//                        return true;
+//                    }
+//                });
 
                 new LinearSnapHelper().attachToRecyclerView(((SnapViewHolder)holder).rcvSnap);
-                //new PagerSnapHelper().attachToRecyclerView(((SnapViewHolder)holder).rcvSnap);
-
                 break;
             case TYPE_LOADING:
 
@@ -95,7 +102,6 @@ public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public int getItemCount() {
         return objectList.size();
     }
-
 
     private class LoadingViewHolder extends RecyclerView.ViewHolder {
         final ProgressBar pbLoading;

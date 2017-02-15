@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, PagerSnapHelperActivity.class));
                 break;
             case R.id.btnMultipleOrientation:
-                startActivity(new Intent(this, LinearSnapHelperActivity.class));
+                startActivity(new Intent(this, MultipleOrientationSnapHelperActivity.class));
                 break;
             case R.id.btnRCVExtended:
                 startActivity(new Intent(this, VerticalRCVActivity.class));

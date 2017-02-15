@@ -1,8 +1,8 @@
 package com.carlitosdroid.horizontalviewdetailrcv.view.adapter;
 
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
-import com.carlitosdroid.horizontalviewdetailrcv.activity.LinearSnapHelperActivity;
 import com.carlitosdroid.horizontalviewdetailrcv.activity.PagerSnapHelperActivity;
-import com.carlitosdroid.horizontalviewdetailrcv.model.HorizontalSnapAdapter;
-import com.carlitosdroid.horizontalviewdetailrcv.model.JuryEntity;
+import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 
 import java.util.List;
@@ -32,17 +30,14 @@ public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     private static final int TYPE_LOADING = 1;
     private static final int TYPE_ERROR = 2;
 
-    private LinearLayoutManager linearLayoutManager;
-
     public PagerSnapHelperAdapter(PagerSnapHelperActivity linearSnapHelperActivity, List<Object> objectList) {
         this.linearSnapHelperActivity = linearSnapHelperActivity;
         this.objectList = objectList;
-        linearLayoutManager = new LinearLayoutManager(linearSnapHelperActivity, LinearLayoutManager.HORIZONTAL, false);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (objectList.get(position) instanceof JuryEntity) {
+        if (objectList.get(position) instanceof AnimalEntity) {
             return TYPE_ITEM;
         }else if(objectList.get(position) instanceof LoadingEntity){
             return TYPE_LOADING;
@@ -56,7 +51,7 @@ public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         View view;
         switch (viewType){
             case TYPE_ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_pager, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pager, parent, false);
                 return new SnapViewHolder(view);
             case TYPE_LOADING:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_progress, parent, false);
@@ -72,16 +67,9 @@ public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         switch (holder.getItemViewType()) {
             case TYPE_ITEM:
-                JuryEntity juryEntity = (JuryEntity) objectList.get(position);
-                ((SnapViewHolder)holder).lblTitle.setText(juryEntity.getTitle());
-                ((SnapViewHolder)holder).rcvSnap.setLayoutManager(linearLayoutManager);
-
-                HorizontalSnapAdapter horizontalSnapAdapter = new HorizontalSnapAdapter(juryEntity.getAnimalEntities());
-                ((SnapViewHolder)holder).rcvSnap.setAdapter(horizontalSnapAdapter);
-
-                new LinearSnapHelper().attachToRecyclerView(((SnapViewHolder)holder).rcvSnap);
-                //new PagerSnapHelper().attachToRecyclerView(((SnapViewHolder)holder).rcvSnap);
-
+                AnimalEntity animalEntity = (AnimalEntity) objectList.get(position);
+                ((SnapViewHolder)holder).lblMessage.setText(animalEntity.getTitle());
+                ((SnapViewHolder)holder).imgAndroid.setImageResource(R.drawable.ic_android_green_500_48dp);
                 break;
             case TYPE_LOADING:
 
@@ -108,13 +96,13 @@ public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
     public static class SnapViewHolder extends RecyclerView.ViewHolder{
 
-        AppCompatTextView lblTitle;
-        RecyclerView rcvSnap;
+        AppCompatTextView lblMessage;
+        AppCompatImageView imgAndroid;
 
         public SnapViewHolder(View itemView) {
             super(itemView);
-            lblTitle = (AppCompatTextView) itemView.findViewById(R.id.lblTitle);
-            rcvSnap = (RecyclerView) itemView.findViewById(R.id.rcvSnap);
+            lblMessage = (AppCompatTextView) itemView.findViewById(R.id.lblMessage);
+            imgAndroid = (AppCompatImageView) itemView.findViewById(R.id.imgAndroid);
         }
     }
 

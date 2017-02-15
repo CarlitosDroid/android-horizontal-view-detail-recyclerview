@@ -12,11 +12,9 @@ import android.view.View;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
 import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
-import com.carlitosdroid.horizontalviewdetailrcv.model.HorizontalSnapAdapter;
-import com.carlitosdroid.horizontalviewdetailrcv.model.JuryEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.PagerSnapHelperAdapter;
-import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.SnapAdapter;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +22,7 @@ import java.util.List;
 public class PagerSnapHelperActivity extends AppCompatActivity {
 
     RecyclerView rcvAnimals;
-    private SnapAdapter snapAdapter;
     private List<Object> objectList = new ArrayList<>();
-    private List<AnimalEntity> animalEntities = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
 
     @Override
@@ -41,9 +37,8 @@ public class PagerSnapHelperActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         for (int i = 0; i < 10; i++) {
-            animalEntities.add(new AnimalEntity(false, "item" + i));
+            objectList.add(new AnimalEntity(false, "item" + i));
         }
-        objectList.add(new JuryEntity("HOLAAA", animalEntities));
         addLoadingItem();
 
         PagerSnapHelperAdapter snapHelperAdapter = new PagerSnapHelperAdapter(this, objectList);

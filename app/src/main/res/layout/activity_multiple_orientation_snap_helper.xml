@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.LinearSnapHelperActivity">
+    tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSnapHelperActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_linear_snap_helper" />
+    <include layout="@layout/content_multiple_orientation_snap_helper" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
