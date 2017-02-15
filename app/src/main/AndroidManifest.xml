@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.VerticalRCVActivity">
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,6 +16,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.HorizontalRCVActivity" />
+        <activity android:name=".activity.VerticalRCVActivity" />
+        <activity
+            android:name=".activity.LinearSnapHelperActivity"
+            android:label="@string/title_activity_linear_snap_helper"/>
     </application>
 
 </manifest>
