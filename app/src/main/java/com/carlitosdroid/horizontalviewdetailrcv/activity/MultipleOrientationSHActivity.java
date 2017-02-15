@@ -1,10 +1,13 @@
 package com.carlitosdroid.horizontalviewdetailrcv.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
 import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
@@ -15,7 +18,7 @@ import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.MultipleOrientatio
 import java.util.ArrayList;
 import java.util.List;
 
-public class MultipleOrientationSnapHelperActivity extends AppCompatActivity {
+public class MultipleOrientationSHActivity extends AppCompatActivity {
 
     RecyclerView rcvAnimals;
     private MultipleOrientationAdapter multipleOrientationAdapter;
@@ -26,7 +29,7 @@ public class MultipleOrientationSnapHelperActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_multiple_orientation_snap_helper);
+        setContentView(R.layout.activity_multiple_orientation_sh);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         rcvAnimals = (RecyclerView) findViewById(R.id.rcvAnimals);
@@ -34,7 +37,7 @@ public class MultipleOrientationSnapHelperActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             animalEntities.add(new AnimalEntity(false, "item" + i));
         }
-        objectList.add(new JuryEntity("HOLAAA", animalEntities));
+        objectList.add(new JuryEntity("TITLE", animalEntities));
         addLoadingItem();
 
         layoutManager = new LinearLayoutManager(this);
@@ -45,15 +48,14 @@ public class MultipleOrientationSnapHelperActivity extends AppCompatActivity {
         rcvAnimals.setLayoutManager(layoutManager);
         rcvAnimals.setAdapter(multipleOrientationAdapter);
 
-//
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 
     private void addLoadingItem() {

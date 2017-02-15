@@ -8,22 +8,27 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PagerSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
 import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
+import com.carlitosdroid.horizontalviewdetailrcv.view.Util.GravitySnapHelper;
 import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.PagerSnapHelperAdapter;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagerSnapHelperActivity extends AppCompatActivity {
+public class PagerSnapHelperActivity extends AppCompatActivity implements GravitySnapHelper.SnapListener{
 
     RecyclerView rcvAnimals;
     private List<Object> objectList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
+
+    boolean mSnapping;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,27 @@ public class PagerSnapHelperActivity extends AppCompatActivity {
         rcvAnimals.setAdapter(snapHelperAdapter);
 
         new PagerSnapHelper().attachToRecyclerView(rcvAnimals);
+        //rcvAnimals.setOnFlingListener(null);
+
+       // new GravitySnapHelper(Gravity.START, false, this).attachToRecyclerView(rcvAnimals);
+        rcvAnimals.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
+                    //Log.e("SCROLL_STATE_SETTLING","SCROLL_STATE_SETTLING " +getSnappedPosition());
+                }
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE ){
+                    int position = getSnappedPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        Log.e("SCROLL_STATE_IDLE","SCROLL_STATE_IDLE " + getSnappedPosition());
+                    }
+                }
+            }
+        });
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -57,8 +83,16 @@ public class PagerSnapHelperActivity extends AppCompatActivity {
         });
     }
 
+    private int getSnappedPosition (){
+        return linearLayoutManager.findFirstCompletelyVisibleItemPosition();
+    }
+
     private void addLoadingItem() {
         objectList.add(new LoadingEntity("loading"));
     }
 
+    @Override
+    public void onSnap(int position) {
+        Log.e("FINAL POSITION ","FINAL POSITION  " + position);
+    }
 }

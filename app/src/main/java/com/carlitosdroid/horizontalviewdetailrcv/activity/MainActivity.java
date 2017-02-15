@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(this, PagerSnapHelperActivity.class));
                 break;
             case R.id.btnMultipleOrientation:
-                startActivity(new Intent(this, MultipleOrientationSnapHelperActivity.class));
+                startActivity(new Intent(this, MultipleOrientationSHActivity.class));
                 break;
             case R.id.btnRCVExtended:
                 startActivity(new Intent(this, VerticalRCVActivity.class));

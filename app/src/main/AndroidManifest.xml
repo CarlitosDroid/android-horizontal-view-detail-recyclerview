@@ -18,7 +18,7 @@
         <activity android:name=".activity.HorizontalRCVActivity" />
         <activity android:name=".activity.VerticalRCVActivity" />
         <activity
-            android:name=".activity.MultipleOrientationSnapHelperActivity"
+            android:name=".activity.MultipleOrientationSHActivity"
             android:label="@string/title_activity_linear_snap_helper" />
         <activity
             android:name=".activity.PagerSnapHelperActivity"

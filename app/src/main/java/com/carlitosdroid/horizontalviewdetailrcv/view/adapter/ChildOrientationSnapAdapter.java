@@ -17,11 +17,11 @@ import java.util.List;
  *
  */
 
-public class OrientationSnapAdapter extends RecyclerView.Adapter<OrientationSnapAdapter.HorizontalSnapViewHolder> {
+public class ChildOrientationSnapAdapter extends RecyclerView.Adapter<ChildOrientationSnapAdapter.HorizontalSnapViewHolder> {
 
     private List<AnimalEntity> animalEntities;
 
-    public OrientationSnapAdapter(List<AnimalEntity> animalEntities) {
+    public ChildOrientationSnapAdapter(List<AnimalEntity> animalEntities) {
         this.animalEntities = animalEntities;
     }
 

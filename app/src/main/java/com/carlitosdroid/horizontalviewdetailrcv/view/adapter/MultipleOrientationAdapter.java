@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
-import com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSnapHelperActivity;
+import com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSHActivity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.JuryEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 
@@ -23,7 +23,7 @@ import java.util.List;
 
 public class MultipleOrientationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private MultipleOrientationSnapHelperActivity multipleOrientationSnapHelperActivity;
+    private MultipleOrientationSHActivity multipleOrientationSHActivity;
     private List<Object> objectList;
 
     private static final int TYPE_ITEM = 0;
@@ -32,10 +32,10 @@ public class MultipleOrientationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private LinearLayoutManager linearLayoutManager;
 
-    public MultipleOrientationAdapter(MultipleOrientationSnapHelperActivity multipleOrientationSnapHelperActivity, List<Object> objectList) {
-        this.multipleOrientationSnapHelperActivity = multipleOrientationSnapHelperActivity;
+    public MultipleOrientationAdapter(MultipleOrientationSHActivity multipleOrientationSHActivity, List<Object> objectList) {
+        this.multipleOrientationSHActivity = multipleOrientationSHActivity;
         this.objectList = objectList;
-        linearLayoutManager = new LinearLayoutManager(multipleOrientationSnapHelperActivity, LinearLayoutManager.HORIZONTAL, false);
+        linearLayoutManager = new LinearLayoutManager(multipleOrientationSHActivity, LinearLayoutManager.HORIZONTAL, false);
     }
 
     @Override
@@ -74,18 +74,8 @@ public class MultipleOrientationAdapter extends RecyclerView.Adapter<RecyclerVie
                 ((SnapViewHolder)holder).lblTitle.setText(juryEntity.getTitle());
                 ((SnapViewHolder)holder).rcvSnap.setLayoutManager(linearLayoutManager);
 
-                OrientationSnapAdapter orientationSnapAdapter = new OrientationSnapAdapter(juryEntity.getAnimalEntities());
-                ((SnapViewHolder)holder).rcvSnap.setAdapter(orientationSnapAdapter);
-
-//                ((SnapViewHolder)holder).rcvSnap.setOnFlingListener(new OnFlingListener() {
-//                    @Override
-//                    public boolean onFling(int velocityX, int velocityY) {
-//
-//                        Log.e("VEAMOS1 ","VEAMOS " +velocityX );
-//                        Log.e("VEAMOS2 ","VEAMOS "  +velocityY);
-//                        return true;
-//                    }
-//                });
+                ChildOrientationSnapAdapter childOrientationSnapAdapter = new ChildOrientationSnapAdapter(juryEntity.getAnimalEntities());
+                ((SnapViewHolder)holder).rcvSnap.setAdapter(childOrientationSnapAdapter);
 
                 new LinearSnapHelper().attachToRecyclerView(((SnapViewHolder)holder).rcvSnap);
                 break;

@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSnapHelperActivity"
-    tools:showIn="@layout/activity_multiple_orientation_snap_helper">
+    tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.MultipleOrientationSHActivity"
+    tools:showIn="@layout/activity_multiple_orientation_sh">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rcvAnimals"
