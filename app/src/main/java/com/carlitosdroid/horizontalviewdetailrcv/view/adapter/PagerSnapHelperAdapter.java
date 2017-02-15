@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
 import com.carlitosdroid.horizontalviewdetailrcv.activity.LinearSnapHelperActivity;
+import com.carlitosdroid.horizontalviewdetailrcv.activity.PagerSnapHelperActivity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.HorizontalSnapAdapter;
 import com.carlitosdroid.horizontalviewdetailrcv.model.JuryEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
@@ -18,13 +19,13 @@ import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 import java.util.List;
 
 /**
- * Created by Carlos Leonardo Carmilo Vargas Huamán on 2/15/17.
+ * Created by Carlos Leonardo Camilo Vargas Huamán on 2/15/17.
  *
  */
 
-public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private LinearSnapHelperActivity linearSnapHelperActivity;
+    private PagerSnapHelperActivity linearSnapHelperActivity;
     private List<Object> objectList;
 
     private static final int TYPE_ITEM = 0;
@@ -33,7 +34,7 @@ public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private LinearLayoutManager linearLayoutManager;
 
-    public SnapAdapter(LinearSnapHelperActivity linearSnapHelperActivity, List<Object> objectList) {
+    public PagerSnapHelperAdapter(PagerSnapHelperActivity linearSnapHelperActivity, List<Object> objectList) {
         this.linearSnapHelperActivity = linearSnapHelperActivity;
         this.objectList = objectList;
         linearLayoutManager = new LinearLayoutManager(linearSnapHelperActivity, LinearLayoutManager.HORIZONTAL, false);
@@ -58,7 +59,7 @@ public class SnapAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_pager, parent, false);
                 return new SnapViewHolder(view);
             case TYPE_LOADING:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_progress, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_progress, parent, false);
                 return new LoadingViewHolder(view);
             case TYPE_ERROR:
                 return null;

@@ -7,19 +7,28 @@
     tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.MainActivity">
 
     <android.support.v7.widget.AppCompatButton
-        android:text="RCV using LinearSnapHelper"
+        android:text="RCV using Pager Snap Helper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp"
-        android:id="@+id/btnRCVWithSnapHelper" />
+        android:id="@+id/btnRCVPagerSnapHelper" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:text="RCV Multiple SnapHelper Orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:id="@+id/btnMultipleOrientation" />
 
     <android.support.v7.widget.AppCompatButton
         android:text="Extending RCV With Simulated Snap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="160dp"
         android:id="@+id/btnRCVExtended" />
 </RelativeLayout>

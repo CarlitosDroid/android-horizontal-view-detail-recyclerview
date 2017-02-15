@@ -2,4 +2,5 @@
     <string name="app_name">HorizontalViewDetailRCV</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_linear_snap_helper">LinearSnapHelperActivity</string>
+    <string name="title_activity_pager_snap_helper">PagerSnapHelperActivity</string>
 </resources>

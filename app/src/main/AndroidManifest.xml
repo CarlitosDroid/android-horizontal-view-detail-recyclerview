@@ -19,7 +19,11 @@
         <activity android:name=".activity.VerticalRCVActivity" />
         <activity
             android:name=".activity.LinearSnapHelperActivity"
-            android:label="@string/title_activity_linear_snap_helper"/>
+            android:label="@string/title_activity_linear_snap_helper" />
+        <activity
+            android:name=".activity.PagerSnapHelperActivity"
+            android:label="@string/title_activity_pager_snap_helper"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
