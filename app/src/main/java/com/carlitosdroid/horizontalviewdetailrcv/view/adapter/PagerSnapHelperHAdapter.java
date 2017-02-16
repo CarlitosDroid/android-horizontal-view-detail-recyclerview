@@ -1,17 +1,16 @@
 package com.carlitosdroid.horizontalviewdetailrcv.view.adapter;
 
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
-import com.carlitosdroid.horizontalviewdetailrcv.activity.PagerSnapHelperActivity;
+import com.carlitosdroid.horizontalviewdetailrcv.activity.PagerSnapHelperHActivity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
 
@@ -22,16 +21,16 @@ import java.util.List;
  *
  */
 
-public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class PagerSnapHelperHAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private PagerSnapHelperActivity linearSnapHelperActivity;
+    private AppCompatActivity linearSnapHelperActivity;
     private List<Object> objectList;
 
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_LOADING = 1;
     private static final int TYPE_ERROR = 2;
 
-    public PagerSnapHelperAdapter(PagerSnapHelperActivity linearSnapHelperActivity, List<Object> objectList) {
+    public PagerSnapHelperHAdapter(AppCompatActivity linearSnapHelperActivity, List<Object> objectList) {
         this.linearSnapHelperActivity = linearSnapHelperActivity;
         this.objectList = objectList;
     }
@@ -52,7 +51,7 @@ public class PagerSnapHelperAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         View view;
         switch (viewType){
             case TYPE_ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pager, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_android_pager, parent, false);
                 return new SnapViewHolder(view);
             case TYPE_LOADING:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_horizontal_progress, parent, false);

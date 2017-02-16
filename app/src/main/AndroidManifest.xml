@@ -21,8 +21,16 @@
             android:name=".activity.MultipleOrientationSHActivity"
             android:label="@string/title_activity_linear_snap_helper" />
         <activity
-            android:name=".activity.PagerSnapHelperActivity"
+            android:name=".activity.PagerSnapHelperHActivity"
             android:label="@string/title_activity_pager_snap_helper"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.PagerSnapHelperVActivity"
+            android:label="@string/title_activity_pager_snap_helper"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.PagerSnapHelperOnlyHActivity"
+            android:label="@string/title_activity_pager_snap_helper_only_h"
             android:theme="@style/AppTheme"></activity>
     </application>
 

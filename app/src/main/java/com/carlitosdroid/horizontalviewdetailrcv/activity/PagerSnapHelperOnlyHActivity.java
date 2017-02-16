@@ -1,5 +1,6 @@
 package com.carlitosdroid.horizontalviewdetailrcv.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,30 +12,39 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.carlitosdroid.horizontalviewdetailrcv.R;
 import com.carlitosdroid.horizontalviewdetailrcv.model.AnimalEntity;
 import com.carlitosdroid.horizontalviewdetailrcv.model.LoadingEntity;
-import com.carlitosdroid.horizontalviewdetailrcv.view.Util.GravitySnapHelper;
-import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.PagerSnapHelperAdapter;
-
+import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.PagerSnapHelperHAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagerSnapHelperActivity extends AppCompatActivity implements View.OnClickListener {
+
+public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rcvAnimals;
     private List<Object> objectList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
+    int position = 0;
+    PagerSnapHelperHAdapter snapHelperHAdapter;
 
     private AppCompatImageView imgBack;
     private AppCompatImageView imgFavorite;
 
+    private int lastVisibleItem;
+    private int totalItemCount;
+    private final int visibleThreshold = 1;
+
+    private boolean setLoading = false;
+    private RequestMoreData requestMoreData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pager_snap_helper);
+        setContentView(R.layout.activity_pager_snap_helper_only_h);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -42,7 +52,6 @@ public class PagerSnapHelperActivity extends AppCompatActivity implements View.O
         imgFavorite = (AppCompatImageView) findViewById(R.id.imgFavorite);
         rcvAnimals = (RecyclerView) findViewById(R.id.rcvAnimals);
 
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         for (int i = 0; i < 10; i++) {
             if (i==2 || i==5 || i==9) {
@@ -53,28 +62,16 @@ public class PagerSnapHelperActivity extends AppCompatActivity implements View.O
         }
         addLoadingItem();
 
-        PagerSnapHelperAdapter snapHelperAdapter = new PagerSnapHelperAdapter(this, objectList);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        snapHelperHAdapter = new PagerSnapHelperHAdapter(this, objectList);
         rcvAnimals.setLayoutManager(linearLayoutManager);
-        rcvAnimals.setAdapter(snapHelperAdapter);
+        rcvAnimals.setAdapter(snapHelperHAdapter);
+        linearLayoutManager.scrollToPosition(position);
 
         new PagerSnapHelper().attachToRecyclerView(rcvAnimals);
 
         rcvAnimals.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                int position = getSnappedPosition();
-                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
-                    //Log.e("ONSCROLLSTATECHANGED", "SCROLL_STATE_SETTLING " + position);
-                }
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    if (position != RecyclerView.NO_POSITION) {
-                        //Log.e("ONSCROLLSTATECHANGED", "SCROLL_STATE_IDLE " + position);
-                    }
-                }
-            }
-
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -90,8 +87,18 @@ public class PagerSnapHelperActivity extends AppCompatActivity implements View.O
                         } else {
                             imgFavorite.setImageResource(R.drawable.ic_favorite_white_24dp);
                         }
-                    }else if(objectList.get(position) instanceof LoadingEntity){
+                    } else if (objectList.get(position) instanceof LoadingEntity) {
                         imgFavorite.setVisibility(View.GONE);
+                    }
+                }
+
+                totalItemCount = linearLayoutManager.getItemCount();
+                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+                if (totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                    if (!setLoading) {
+                        setLoading = true;
+                        requestMoreData = new RequestMoreData();
+                        requestMoreData.execute();
                     }
                 }
             }
@@ -116,8 +123,56 @@ public class PagerSnapHelperActivity extends AppCompatActivity implements View.O
         return linearLayoutManager.findFirstCompletelyVisibleItemPosition();
     }
 
+
+    private class RequestMoreData extends AsyncTask<Void, Void, Void> {
+
+        private RequestMoreData() {
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(PagerSnapHelperOnlyHActivity.this, "Requesting...", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            shouldRemoveLoadingItem();
+            setLoading = false;
+            int tempSize = objectList.size();
+            for (int i = tempSize; i < (tempSize + 10); i++) {
+                objectList.add(new AnimalEntity(false, "item" + i));
+            }
+            addLoadingItem();
+            snapHelperHAdapter.notifyDataSetChanged();
+        }
+    }
+
     private void addLoadingItem() {
         objectList.add(new LoadingEntity("loading"));
+    }
+
+    private void shouldRemoveLoadingItem() {
+        if (objectList.get(objectList.size() - 1) instanceof LoadingEntity) {
+            objectList.remove(objectList.size() - 1);
+            snapHelperHAdapter.notifyItemRemoved(objectList.size());
+        }
+    }
+
+    public void changeImageAndroid(int position, boolean isFavorited) {
+        ((AnimalEntity) objectList.get(position)).setFavorite(isFavorited);
+        snapHelperHAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -129,7 +184,7 @@ public class PagerSnapHelperActivity extends AppCompatActivity implements View.O
             case R.id.imgFavorite:
                 int position = getSnappedPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    Log.e("POSITION CLICKED","POSITION CLICKED " + position);
+                    Toast.makeText(this, "item position " + position, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

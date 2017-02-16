@@ -78,7 +78,7 @@ public class VerticalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case TYPE_ITEM:
                 AnimalEntity animalEntity = (AnimalEntity) objectList.get(position);
                 int imgBackground = animalEntity.isFavorite() ? R.drawable.ic_favorite_red_500_24dp : R.drawable.ic_favorite_grey_500_24dp;
-                ((VerticalAdapter.ItemViewHolder) holder).imgAndroid.setImageResource(imgBackground);
+                ((VerticalAdapter.ItemViewHolder) holder).imgFavorite.setImageResource(imgBackground);
                 ((ItemViewHolder) holder).lblTitle.setText(animalEntity.getTitle());
                 break;
             case TYPE_LOADING:
@@ -98,16 +98,14 @@ public class VerticalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView lblTitle;
-        private final AppCompatImageView imgAndroid;
+        private final AppCompatImageView imgFavorite;
 
         ItemViewHolder(View view) {
             super(view);
             lblTitle = (TextView) view.findViewById(R.id.lblTitle);
-            imgAndroid = (AppCompatImageView) view.findViewById(R.id.imgAndroid);
-
+            imgFavorite = (AppCompatImageView) view.findViewById(R.id.imgFavorite);
             lblTitle.setOnClickListener(this);
-            imgAndroid.setOnClickListener(this);
-
+            imgFavorite.setOnClickListener(this);
         }
 
         @Override

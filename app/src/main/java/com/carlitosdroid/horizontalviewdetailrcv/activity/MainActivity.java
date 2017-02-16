@@ -10,7 +10,8 @@ import com.carlitosdroid.horizontalviewdetailrcv.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private AppCompatButton btnRCVPagerSnapHelper;
+    private AppCompatButton btnOnlyHorizontalPSH;
+    private AppCompatButton btnVerticalAndHorizontalPSH;
     private AppCompatButton btnMultipleOrientation;
     private AppCompatButton btnRCVExtended;
 
@@ -19,11 +20,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        btnRCVPagerSnapHelper = (AppCompatButton) findViewById(R.id.btnRCVPagerSnapHelper);
+        btnOnlyHorizontalPSH = (AppCompatButton) findViewById(R.id.btnOnlyHorizontalPSH);
+        btnVerticalAndHorizontalPSH = (AppCompatButton) findViewById(R.id.btnVerticalAndHorizontalPSH);
         btnMultipleOrientation = (AppCompatButton) findViewById(R.id.btnMultipleOrientation);
         btnRCVExtended = (AppCompatButton) findViewById(R.id.btnRCVExtended);
 
-        btnRCVPagerSnapHelper.setOnClickListener(this);
+        btnOnlyHorizontalPSH.setOnClickListener(this);
+        btnVerticalAndHorizontalPSH.setOnClickListener(this);
         btnMultipleOrientation.setOnClickListener(this);
         btnRCVExtended.setOnClickListener(this);
 
@@ -32,8 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnRCVPagerSnapHelper:
-                startActivity(new Intent(this, PagerSnapHelperActivity.class));
+            case R.id.btnOnlyHorizontalPSH:
+                startActivity(new Intent(this, PagerSnapHelperOnlyHActivity.class));
+                break;
+            case R.id.btnVerticalAndHorizontalPSH:
+                startActivity(new Intent(this, PagerSnapHelperVActivity.class));
                 break;
             case R.id.btnMultipleOrientation:
                 startActivity(new Intent(this, MultipleOrientationSHActivity.class));

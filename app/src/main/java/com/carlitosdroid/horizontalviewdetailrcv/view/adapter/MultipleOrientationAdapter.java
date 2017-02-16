@@ -54,7 +54,7 @@ public class MultipleOrientationAdapter extends RecyclerView.Adapter<RecyclerVie
         View view;
         switch (viewType){
             case TYPE_ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rcv_pager, parent, false);
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_multiple_view, parent, false);
                 return new SnapViewHolder(view);
             case TYPE_LOADING:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_vertical_progress, parent, false);

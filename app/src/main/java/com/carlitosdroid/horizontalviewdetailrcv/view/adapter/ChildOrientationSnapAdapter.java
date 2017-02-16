@@ -27,7 +27,7 @@ public class ChildOrientationSnapAdapter extends RecyclerView.Adapter<ChildOrien
 
     @Override
     public HorizontalSnapViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pager, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_android_pager, parent, false);
         return new HorizontalSnapViewHolder(view);
     }
 

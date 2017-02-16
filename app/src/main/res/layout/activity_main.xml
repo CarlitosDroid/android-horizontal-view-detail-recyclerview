@@ -7,13 +7,22 @@
     tools:context="com.carlitosdroid.horizontalviewdetailrcv.activity.MainActivity">
 
     <android.support.v7.widget.AppCompatButton
-        android:text="RCV using Pager Snap Helper"
+        android:text="RCV using only Horizontal Pager Snap Helper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:id="@+id/btnRCVPagerSnapHelper" />
+        android:layout_marginTop="30dp"
+        android:id="@+id/btnOnlyHorizontalPSH" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:text="Vertical and Horizontal Pager Snap Helper Synchronized"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:id="@+id/btnVerticalAndHorizontalPSH" />
 
     <android.support.v7.widget.AppCompatButton
         android:text="RCV Multiple SnapHelper Orientation"
@@ -21,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="180dp"
         android:id="@+id/btnMultipleOrientation" />
 
     <android.support.v7.widget.AppCompatButton
@@ -29,6 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="250dp"
         android:id="@+id/btnRCVExtended" />
 </RelativeLayout>
