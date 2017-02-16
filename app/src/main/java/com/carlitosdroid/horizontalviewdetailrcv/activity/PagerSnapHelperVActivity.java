@@ -102,7 +102,7 @@ public class PagerSnapHelperVActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(PagerSnapHelperVActivity.this, "Requesting...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PagerSnapHelperVActivity.this, "Requesting1...", Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -176,6 +176,9 @@ public class PagerSnapHelperVActivity extends AppCompatActivity {
                 objectList.addAll((List<Object>) data.getSerializableExtra("newList"));
                 snapHelperVAdapter.notifyDataSetChanged();
                 linearLayoutManager.scrollToPosition(data.getExtras().getInt("position"));
+
+                shouldRemoveLoadingItem();
+
             }
         }
     }

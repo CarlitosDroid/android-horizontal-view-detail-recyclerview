@@ -126,7 +126,7 @@ public class PagerSnapHelperHActivity extends AppCompatActivity implements View.
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(PagerSnapHelperHActivity.this, "Requesting...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PagerSnapHelperHActivity.this, "Requesting2...", Toast.LENGTH_SHORT).show();
         }
 
         @Override
