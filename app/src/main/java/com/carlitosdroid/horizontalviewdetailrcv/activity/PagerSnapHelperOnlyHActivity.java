@@ -22,7 +22,6 @@ import com.carlitosdroid.horizontalviewdetailrcv.view.adapter.PagerSnapHelperHAd
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements View.OnClickListener {
 
     RecyclerView rcvAnimals;
@@ -52,14 +51,7 @@ public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements V
         imgFavorite = (AppCompatImageView) findViewById(R.id.imgFavorite);
         rcvAnimals = (RecyclerView) findViewById(R.id.rcvAnimals);
 
-
-        for (int i = 0; i < 10; i++) {
-            if (i==2 || i==5 || i==9) {
-                objectList.add(new AnimalEntity(false, "item" + i));
-            }else{
-                objectList.add(new AnimalEntity(true, "item" + i));
-            }
-        }
+        loadAnimalsInitialData();
         addLoadingItem();
 
         linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -104,7 +96,6 @@ public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements V
             }
         });
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,13 +107,21 @@ public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements V
 
         imgBack.setOnClickListener(this);
         imgFavorite.setOnClickListener(this);
+    }
 
+    private void loadAnimalsInitialData(){
+        for (int i = 0; i < 10; i++) {
+            if (i==2 || i==5 || i==9) {
+                objectList.add(new AnimalEntity(true, "item" + i));
+            }else{
+                objectList.add(new AnimalEntity(false, "item" + i));
+            }
+        }
     }
 
     private int getSnappedPosition() {
         return linearLayoutManager.findFirstCompletelyVisibleItemPosition();
     }
-
 
     private class RequestMoreData extends AsyncTask<Void, Void, Void> {
 
@@ -152,7 +151,11 @@ public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements V
             setLoading = false;
             int tempSize = objectList.size();
             for (int i = tempSize; i < (tempSize + 10); i++) {
-                objectList.add(new AnimalEntity(false, "item" + i));
+                if (i==(tempSize+4) || i==(tempSize+8)) {
+                    objectList.add(new AnimalEntity(true, "item" + i));
+                }else{
+                    objectList.add(new AnimalEntity(false, "item" + i));
+                }
             }
             addLoadingItem();
             snapHelperHAdapter.notifyDataSetChanged();
@@ -168,11 +171,6 @@ public class PagerSnapHelperOnlyHActivity extends AppCompatActivity implements V
             objectList.remove(objectList.size() - 1);
             snapHelperHAdapter.notifyItemRemoved(objectList.size());
         }
-    }
-
-    public void changeImageAndroid(int position, boolean isFavorited) {
-        ((AnimalEntity) objectList.get(position)).setFavorite(isFavorited);
-        snapHelperHAdapter.notifyDataSetChanged();
     }
 
     @Override
