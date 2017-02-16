@@ -124,7 +124,7 @@ public class HorizontalRCVActivity extends AppCompatActivity {
     }
 
     public void changeImageAndroid(int position, boolean isFavorited){
-        ((AnimalEntity)objectList.get(position)).setIsfavorite(isFavorited);
+        ((AnimalEntity)objectList.get(position)).setFavorite(isFavorited);
         horizontalAdapter.notifyDataSetChanged();
     }
 

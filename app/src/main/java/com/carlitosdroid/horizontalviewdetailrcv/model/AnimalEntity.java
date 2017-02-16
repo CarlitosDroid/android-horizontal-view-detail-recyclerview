@@ -9,20 +9,20 @@ import java.io.Serializable;
 
 public class AnimalEntity implements Serializable{
 
-    private boolean isfavorite;
+    private boolean favorite;
     private String title;
 
-    public AnimalEntity(boolean isfavorite, String title) {
-        this.isfavorite = isfavorite;
+    public AnimalEntity(boolean favorite, String title) {
+        this.favorite = favorite;
         this.title = title;
     }
 
-    public boolean isfavorite() {
-        return isfavorite;
+    public boolean isFavorite() {
+        return favorite;
     }
 
-    public void setIsfavorite(boolean isfavorite) {
-        this.isfavorite = isfavorite;
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     public String getTitle() {

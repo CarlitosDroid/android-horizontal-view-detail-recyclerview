@@ -72,7 +72,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         switch (holder.getItemViewType()) {
             case TYPE_ITEM:
                 AnimalEntity animalEntity = (AnimalEntity) objectList.get(position);
-                int imgBackground = animalEntity.isfavorite() ? R.drawable.ic_favorite_red_500_24dp : R.drawable.ic_favorite_grey_500_24dp;
+                int imgBackground = animalEntity.isFavorite() ? R.drawable.ic_favorite_red_500_24dp : R.drawable.ic_favorite_grey_500_24dp;
                 ((ItemViewHolder) holder).imgAndroid.setImageResource(imgBackground);
                 ((ItemViewHolder) holder).lblTitle.setText(animalEntity.getTitle());
                 break;
@@ -109,7 +109,7 @@ public class HorizontalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.imgAndroid:
-                    if (((AnimalEntity) objectList.get(getAdapterPosition())).isfavorite()) {
+                    if (((AnimalEntity) objectList.get(getAdapterPosition())).isFavorite()) {
                         horizontalRCVActivity.changeImageAndroid(getAdapterPosition(), false);
                     } else {
                         horizontalRCVActivity.changeImageAndroid(getAdapterPosition(), true);

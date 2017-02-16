@@ -21,6 +21,7 @@
         android:layout_height="match_parent">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imgBack"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
@@ -28,7 +29,6 @@
             android:src="@drawable/ic_arrow_back_white_24dp"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/imgBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -38,6 +38,7 @@
             android:text="DETAIL"/>
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imgFavorite"
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:scaleType="centerInside"
