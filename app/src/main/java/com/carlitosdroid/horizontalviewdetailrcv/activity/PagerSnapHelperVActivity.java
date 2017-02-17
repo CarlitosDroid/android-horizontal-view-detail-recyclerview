@@ -176,9 +176,6 @@ public class PagerSnapHelperVActivity extends AppCompatActivity {
                 objectList.addAll((List<Object>) data.getSerializableExtra("newList"));
                 snapHelperVAdapter.notifyDataSetChanged();
                 linearLayoutManager.scrollToPosition(data.getExtras().getInt("position"));
-
-                shouldRemoveLoadingItem();
-
             }
         }
     }
